@@ -8,6 +8,14 @@ const PORT = process.env.PROT || 8080;
 const server = app.listen(PORT,()=>{
     console.log(`Èscuchando en el puerto ${PORT}`)
 })
+app.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, 	X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-	Method');
+	res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, 	DELETE');
+	res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+	next();
+});
+
 app.use(express.json())
 app.post('/login',async(req,res) =>{
     let producto = req.body
